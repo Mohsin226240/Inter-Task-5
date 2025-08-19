@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo" aria-label="Airbnb Home">
+            <svg viewBox="0 0 1024 1024" fill="currentColor">
+                <path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"/>
+            </svg>
+        </a>
+        
+        <div class="header-search">
+            <div class="search-option">Anywhere</div>
+            <div class="search-option">Any week</div>
+            <div class="search-option">Add guests</div>
+            <div class="search-divider"></div>
+            <div class="search-icon">
+                <i class="fas fa-search" aria-label="Search"></i>
+            </div>
+        </div>
+        
+        <div class="header-nav">
+            <a href="#" class="host-link">
+                <span>Become a Host</span>
+            </a>
+            
+            <div class="language-toggle">
+                <i class="fas fa-globe" aria-label="Change language"></i>
+            </div>
+            
+            <div class="profile-menu" role="button" aria-expanded="false" aria-controls="user-menu-dropdown">
+                <i class="fas fa-bars menu-icon" aria-hidden="true"></i>
+                <div class="user-icon">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-nav" role="navigation" aria-label="Property types">
+            <div class="nav-item active" tabindex="0">
+                <i class="fas fa-igloo nav-icon"></i>
+                <span class="nav-label">Rooms</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-utensils nav-icon"></i>
+                <span class="nav-label">Restaurants</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-mountain nav-icon"></i>
+                <span class="nav-label">Beach</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-swimming-pool nav-icon"></i>
+                <span class="nav-label">Amazing pools</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-campground nav-icon"></i>
+                <span class="nav-label">Camping</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-water nav-icon"></i>
+                <span class="nav-label">Lakefront</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-chess-rook nav-icon"></i>
+                <span class="nav-label">Castles</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-snowflake nav-icon"></i>
+                <span class="nav-label">Arctic</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-tree nav-icon"></i>
+                <span class="nav-label">Tropical</span>
+            </div>
+            <div class="nav-item" tabindex="0">
+                <i class="fas fa-house-user nav-icon"></i>
+                <span class="nav-label">Tiny homes</span>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <button class="filter-btn open-modal-btn">
+                <i class="fas fa-filter" aria-hidden="true"></i>
+                <span>Filters</span>
+            </button>
+            <div class="filter-divider"></div>
+            <button class="filter-btn">
+                <span>Price</span>
+            </button>
+            <button class="filter-btn">
+                <span>Type of place</span>
+            </button>
+            <button class="filter-btn">
+                <span>Rooms and beds</span>
+            </button>
+            <button class="filter-btn">
+                <span>Property type</span>
+            </button>
+            <button class="filter-btn">
+                <span>More filters</span>
+            </button>
+            <div class="filter-toggle" role="button" tabindex="0" aria-pressed="false">
+                <span>Display total before taxes</span>
+                <i class="fas fa-toggle-off"></i>
+            </div>
+        </div>
+
+        <div class="listings-grid">
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="https://www.santorinivillas.co.uk/wp-content/uploads/2019/09/terrace-ayama-villa-fira-santorini-views.jpg" alt="Luxury villa with pool in Bali">
+                    <div class="wishlist-btn" role="button" aria-label="Add to wishlist">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="listing-details">
+                    <div class="listing-location">
+                        <div class="listing-title">Luxury Villa with Pool, Bali</div>
+                        <div class="listing-rating">
+                            <i class="fas fa-star star-icon"></i>
+                            <span class="rating-value">4.92</span>
+                        </div>
+                    </div>
+                    <div class="listing-distance">1,234 kilometers away</div>
+                    <div class="listing-dates">Nov 12-17</div>
+                    <div class="listing-price">$249 night <span class="price-span">before taxes</span></div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="https://www.rajaprueksamuiresort.com/images/beachfront_bungalow/img13.jpg" alt="Beachfront bungalow in Phuket">
+                    <div class="wishlist-btn" role="button" aria-label="Add to wishlist">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="listing-details">
+                    <div class="listing-location">
+                        <div class="listing-title">Beachfront Bungalow, Phuket</div>
+                        <div class="listing-rating">
+                            <i class="fas fa-star star-icon"></i>
+                            <span class="rating-value">4.87</span>
+                        </div>
+                    </div>
+                    <div class="listing-distance">2,345 kilometers away</div>
+                    <div class="listing-dates">Dec 5-10</div>
+                    <div class="listing-price">$189 night <span class="price-span">before taxes</span></div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="https://www.smokymountainvacation.com/media/66bf6c4b3134019609e65dc6/xlarge.webp" alt="Mountain cabin in Aspen with a view">
+                    <div class="wishlist-btn" role="button" aria-label="Add to wishlist">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="listing-details">
+                    <div class="listing-location">
+                        <div class="listing-title">Mountain View Cabin, Aspen</div>
+                        <div class="listing-rating">
+                            <i class="fas fa-star star-icon"></i>
+                            <span class="rating-value">4.95</span>
+                        </div>
+                    </div>
+                    <div class="listing-distance">3,456 kilometers away</div>
+                    <div class="listing-dates">Jan 15-20</div>
+                    <div class="listing-price">$325 night <span class="price-span">before taxes</span></div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="https://cdn.vox-cdn.com/thumbor/0eoiN9XqqsSVbiCNo_h0hbUP_yI=/0x0:1023x682/1200x800/filters:focal(431x260:593x422)/cdn.vox-cdn.com/uploads/chorus_image/image/64006695/0b0cd00c_891f_49a5_a75c_cdd640a23020.f10.0.jpg" alt="Modern apartment in NYC with city views">
+                    <div class="wishlist-btn" role="button" aria-label="Add to wishlist">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="listing-details">
+                    <div class="listing-location">
+                        <div class="listing-title">Modern Apartment, NYC</div>
+                        <div class="listing-rating">
+                            <i class="fas fa-star star-icon"></i>
+                            <span class="rating-value">4.78</span>
+                        </div>
+                    </div>
+                    <div class="listing-distance">4,567 kilometers away</div>
+                    <div class="listing-dates">Feb 8-13</div>
+                    <div class="listing-price">$175 night <span class="price-span">before taxes</span></div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="https://www.gonyeahomes.com/wp-content/uploads/2024/06/6-Maclynn-Rd_Exteriors_006-1024x683.jpeg" alt="Lakefront house in Tahoe">
+                    <div class="wishlist-btn" role="button" aria-label="Add to wishlist">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="listing-details">
+                    <div class="listing-location">
+                        <div class="listing-title">Lakefront House, Tahoe</div>
+                        <div class="listing-rating">
+                            <i class="fas fa-star star-icon"></i>
+                            <span class="rating-value">4.89</span>
+                        </div>
+                    </div>
+                    <div class="listing-distance">5,678 kilometers away</div>
+                    <div class="listing-dates">Mar 12-17</div>
+                    <div class="listing-price">$275 night <span class="price-span">before taxes</span></div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="https://www.rightmove.co.uk/news/content/uploads/2018/05/Gotherington-1.jpg" alt="Country cottage in the Cotswolds">
+                    <div class="wishlist-btn" role="button" aria-label="Add to wishlist">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="listing-details">
+                    <div class="listing-location">
+                        <div class="listing-title">Country Cottage, Cotswolds</div>
+                        <div class="listing-rating">
+                            <i class="fas fa-star star-icon"></i>
+                            <span class="rating-value">4.83</span>
+                        </div>
+                    </div>
+                    <div class="listing-distance">6,789 kilometers away</div>
+                    <div class="listing-dates">Apr 20-25</div>
+                    <div class="listing-price">$150 night <span class="price-span">before taxes</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <div class="footer-links-list">
+                            <a href="#" class="footer-link">Help Center</a>
+                            <a href="#" class="footer-link">AirCover</a>
+                            <a href="#" class="footer-link">Safety information</a>
+                            <a href="#" class="footer-link">Supporting people with disabilities</a>
+                            <a href="#" class="footer-link">Cancellation options</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Community</h3>
+                        <div class="footer-links-list">
+                            <a href="#" class="footer-link">Airbnb.org: disaster relief housing</a>
+                            <a href="#" class="footer-link">Combating discrimination</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Hosting</h3>
+                        <div class="footer-links-list">
+                            <a href="#" class="footer-link">Airbnb your home</a>
+                            <a href="#" class="footer-link">AirCover for Hosts</a>
+                            <a href="#" class="footer-link">Hosting resources</a>
+                            <a href="#" class="footer-link">Community forum</a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Airbnb</h3>
+                        <div class="footer-links-list">
+                            <a href="#" class="footer-link">Newsroom</a>
+                            <a href="#" class="footer-link">New features</a>
+                            <a href="#" class="footer-link">Careers</a>
+                            <a href="#" class="footer-link">Investors</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        <p>© 2023 Airbnb, Inc. • Privacy • Terms • Sitemap</p>
+                    </div>
+                    <div class="legal-links">
+                        <a href="#" class="footer-link">Privacy</a>
+                        <a href="#" class="footer-link">Terms</a>
+                        <a href="#" class="footer-link">Sitemap</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="theme-toggle" role="button" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div id="filter-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Filters</h2>
+                <button class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Filter options would go here. For example:</p>
+                <ul>
+                    <li>Price Range</li>
+                    <li>Number of Bedrooms</li>
+                    <li>Amenities (Wi-Fi, Pool, etc.)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
