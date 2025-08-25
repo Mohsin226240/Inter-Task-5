@@ -723,7 +723,6 @@ body.dark-mode .slider-btn { background: rgba(30, 30, 30, 0.9); color: #ffffff; 
 .popover[aria-hidden="false"] { display: block; }
 .popover h4 { font-size: 16px; margin-bottom: 10px; }
 .price-slider { position: relative; height: 36px; display: grid; grid-template-columns: 1fr; align-items: center; }
-.price-slider input[type="range"] { position: absolute; width: 100%; pointer-events: none; -webkit-appearance: none; background: none; }
 .price-slider input[type="range"]::-webkit-slider-thumb { pointer-events: auto; -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #ff385c; }
 .price-slider .track { position: absolute; left: 0; right: 0; height: 4px; background: #eee; border-radius: 999px; }
 .price-slider .range { position: absolute; height: 4px; background: #222; border-radius: 999px; left: 10%; width: 40%; }
