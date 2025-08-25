@@ -1,67 +1,71 @@
 // Dark Mode Toggle
 const themeToggle = document.querySelector('.theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
+const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
 
 // Check for saved theme preference or respect OS preference
 const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 if (savedTheme === 'dark') {
     document.body.classList.add('dark-mode');
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
-}
-
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
+    if (themeIcon) {
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
-    } else {
-        localStorage.setItem('theme', 'light');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
     }
-});
+}
 
-// Wishlist Toggle
-const wishlistButtons = document.querySelectorAll('.wishlist-btn');
-wishlistButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const icon = btn.querySelector('i');
-        if (icon.classList.contains('far')) {
-            icon.classList.remove('far');
-            icon.classList.add('fas');
-            btn.style.color = '#ff385c';
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
         } else {
-            icon.classList.remove('fas');
-            icon.classList.add('far');
-            btn.style.color = '';
+            localStorage.setItem('theme', 'light');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
         }
     });
+}
+
+// Wishlist Toggle (delegated)
+document.querySelector('.listings-grid')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.wishlist-btn');
+    if (!btn) return;
+    e.stopPropagation();
+    const icon = btn.querySelector('i');
+    if (!icon) return;
+    const liked = icon.classList.toggle('fas');
+    icon.classList.toggle('far', !liked);
+    btn.style.color = liked ? '#ff385c' : '';
 });
 
-// Navigation active state
-const navItems = document.querySelectorAll('.nav-item');
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-    });
+// Navigation active state (delegated)
+document.querySelector('.main-nav')?.addEventListener('click', (e) => {
+    const item = e.target.closest('.nav-item');
+    if (!item) return;
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
 });
 
 // Filter toggle
 const filterToggle = document.querySelector('.filter-toggle');
-filterToggle.addEventListener('click', () => {
-    const icon = filterToggle.querySelector('i');
-    if (icon.classList.contains('fa-toggle-off')) {
-        icon.classList.remove('fa-toggle-off');
-        icon.classList.add('fa-toggle-on');
-    } else {
-        icon.classList.remove('fa-toggle-on');
-        icon.classList.add('fa-toggle-off');
-    }
-});
+if (filterToggle) {
+    filterToggle.addEventListener('click', () => {
+        const icon = filterToggle.querySelector('i');
+        if (!icon) return;
+        if (icon.classList.contains('fa-toggle-off')) {
+            icon.classList.remove('fa-toggle-off');
+            icon.classList.add('fa-toggle-on');
+        } else {
+            icon.classList.remove('fa-toggle-on');
+            icon.classList.add('fa-toggle-off');
+        }
+    });
+}
 
 // Modal Popup
 const modal = document.getElementById('filter-modal');
@@ -69,30 +73,32 @@ const openModalBtn = document.querySelector('.open-modal-btn');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 
 function openModal() {
+    if (!modal) return;
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
+    if (!modal) return;
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = 'auto';
 }
 
-openModalBtn.addEventListener('click', openModal);
-closeModalBtn.addEventListener('click', closeModal);
+if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 
 // Close modal when clicking outside of it
 window.addEventListener('click', (event) => {
-    if (event.target === modal) {
+    if (modal && event.target === modal) {
         closeModal();
     }
 });
 
 // Close modal on ESC
 window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'flex') {
+    if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
         closeModal();
     }
 });
@@ -222,53 +228,59 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const overlay = document.getElementById('search-overlay');
     const whereInput = document.getElementById('where-input');
     const whoSegment = document.querySelector('.segment.who');
-    const guestsPopover = whoSegment.querySelector('.guests-popover');
+    const guestsPopover = whoSegment ? whoSegment.querySelector('.guests-popover') : null;
 
-    function openOverlay(){
-        overlay.setAttribute('aria-hidden', 'false');
-        document.querySelector('header').classList.add('header--condensed');
-        setTimeout(() => whereInput && whereInput.focus(), 50);
+    if (headerSearch && overlay) {
+        function openOverlay(){
+            overlay.setAttribute('aria-hidden', 'false');
+            const headerEl = document.querySelector('header');
+            if (headerEl) headerEl.classList.add('header--condensed');
+            setTimeout(() => whereInput && whereInput.focus(), 50);
+        }
+        function closeOverlay(){
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        headerSearch.addEventListener('click', openOverlay);
+        overlay.addEventListener('click', (e) => {
+            if (e.target.classList.contains('overlay-backdrop')) closeOverlay();
+        });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') closeOverlay();
+        });
     }
-    function closeOverlay(){
-        overlay.setAttribute('aria-hidden', 'true');
+
+    if (whoSegment && guestsPopover) {
+        // Guests steppers
+        const updateGuestsValue = () => {
+            const counts = guestsPopover.querySelectorAll('.count');
+            let total = 0;
+            counts.forEach(c => { if (c.dataset.type !== 'infants' && c.dataset.type !== 'pets') total += parseInt(c.textContent || '0', 10); });
+            const input = whoSegment.querySelector('input');
+            if (input) input.value = total > 0 ? `${total} guest${total>1?'s':''}` : '';
+        };
+
+        guestsPopover.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const row = btn.closest('.guest-row');
+            const countEl = row.querySelector('.count');
+            let val = parseInt(countEl.textContent || '0', 10);
+            if (btn.classList.contains('plus')) val += 1; else if (btn.classList.contains('minus')) val = Math.max(0, val - 1);
+            countEl.textContent = String(val);
+            updateGuestsValue();
+        });
+
+        whoSegment.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const hidden = guestsPopover.getAttribute('aria-hidden') !== 'false';
+            guestsPopover.setAttribute('aria-hidden', hidden ? 'false' : 'true');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!whoSegment.contains(e.target)) guestsPopover.setAttribute('aria-hidden', 'true');
+        });
     }
-
-    headerSearch.addEventListener('click', openOverlay);
-    overlay.addEventListener('click', (e) => {
-        if (e.target.classList.contains('overlay-backdrop')) closeOverlay();
-    });
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') closeOverlay();
-    });
-
-    // Guests steppers
-    const updateGuestsValue = () => {
-        const counts = guestsPopover.querySelectorAll('.count');
-        let total = 0;
-        counts.forEach(c => { if (c.dataset.type !== 'infants' && c.dataset.type !== 'pets') total += parseInt(c.textContent || '0', 10); });
-        whoSegment.querySelector('input').value = total > 0 ? `${total} guest${total>1?'s':''}` : '';
-    };
-
-    guestsPopover.addEventListener('click', (e) => {
-        const btn = e.target.closest('button');
-        if (!btn) return;
-        const row = btn.closest('.guest-row');
-        const countEl = row.querySelector('.count');
-        let val = parseInt(countEl.textContent || '0', 10);
-        if (btn.classList.contains('plus')) val += 1; else if (btn.classList.contains('minus')) val = Math.max(0, val - 1);
-        countEl.textContent = String(val);
-        updateGuestsValue();
-    });
-
-    whoSegment.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const hidden = guestsPopover.getAttribute('aria-hidden') !== 'false';
-        guestsPopover.setAttribute('aria-hidden', hidden ? 'false' : 'true');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!whoSegment.contains(e.target)) guestsPopover.setAttribute('aria-hidden', 'true');
-    });
 })();
 
 // ACCOUNT DROPDOWN
